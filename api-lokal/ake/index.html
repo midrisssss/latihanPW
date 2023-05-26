@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body class="container p-5">
+    <div class="row gap-3">
+      <input
+        type="text"
+        placeholder="Input a Question"
+        id="question"
+        value=""
+        class="form-control col"
+      />
+      <button class="btn btn-primary col">Search</button>
+    </div>
+    <div id="result" class="my-3"></div>
+    <script
+      src="https://code.jquery.com/jquery-3.7.0.js"
+      integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      $(document).ready(function () {
+        $("button").click(function () {
+          var url =
+            "https://kunci-tts-api.vercel.app/api/answers?question=" +
+            $("#question").val();
+          $("#result").empty();
+          $.get(url, function (data, status) {
+            console.log(url);
+            $("result").append(data.title);
+            for (i = 0; i < data.total; i++) {
+              var stars = "<h3>" + data.answers[i].stars + "</h3>";
+              var word = "<h3>" + data.answers[i].word + "</h3>";
+              var clue = "<h3>" + data.answers[i].clue + "</h3>";
+              var card =
+                "<div class='card mb-3 p-3'>" + stars + word + clue + "</div>";
+              $("#result").append(card);
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

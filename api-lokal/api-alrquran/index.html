@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>API AL QURÁN</h1>
+    <div id="result"></div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        let url = "https://api.npoint.io/99c279bb173a6e28359c/data";
+
+        $.get(url, function (data, status) {
+          console.log(data);
+          for (let index = 0; index < data.length; index++) {
+            var h3 = "<h2>" + index + ". " + data[index].nama + "</h2>";
+            var audio =
+              "<audio controls><source src='" +
+              data[index].audio +
+              "'></audio>";
+            $("#result").append(h3, audio);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
